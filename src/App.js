@@ -17,9 +17,6 @@ class App extends Component {
     //re-assign the state var called searchTerm(previously empty string)
     // to js event == change in UI item
     this.setState({ searchTerm: event.target.value });
-    let sTerm = event.target.value;
-    let numChars = sTerm.length;
-    this.setState({ len: numChars }); // typed in value
   }
 
   render() {
