@@ -6,7 +6,7 @@ const spotifyHits = spotifyArray;
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { searchTerm: " ", len: 0, globalArray: spotifyHits };
+    this.state = { searchTerm: " ", globalArray: spotifyHits };
     //bind the function to constructor to handle event change
     this.onSearchFormChange = this.onSearchFormChange.bind(this);
   } // end
@@ -63,7 +63,7 @@ class SearchForm extends Component {
 //**************************************************//
 class SearchResults extends Component {
   //NB the filter function is within the scope of the
-  //searchRsults component
+  //searchResults component
   spotifyFilterFunction(searchTerm) {
     return function (spotObj) {
       let title = spotObj.title;
@@ -83,31 +83,36 @@ class SearchResults extends Component {
     const arrayPassedAsParameter = this.props.globalArray;
     const searchTermFromProps = this.props.searchTerm;
 
+    //spotifyArray contains song duration in seconds must be changed
+    //a.dur becomes parameter of map function below, within the table
+
+    function secondsToMinutes(s) {
+      return (s - (s %= 60)) / 60 + (9 < s ? ":" : ":0") + s;
+    }
+
     return (
-      //<div className="SearchResultsDisplay">
       <table className="table">
         <thead>
           <tr>
-            <th scope="col">Title</th>
             <th scope="col">Artist</th>
+            <th scope="col">Title</th>
+            <th scope="col">Year</th>
+            <th scope="col">Duration</th>
             <th scope="col">Genre</th>
           </tr>
         </thead>
         {arrayPassedAsParameter
           .filter(this.spotifyFilterFunction(searchTermFromProps))
           .map((a) => (
-            // <div key={a.id}>
             <tbody key={a.id}>
               <td>{a.title}</td>
               <td>{a.artist}</td>
-              <td>
-                <i>{a.topgenre}</i>
-              </td>
+              <td>{a.year}</td>
+              <td>{secondsToMinutes(a.dur)}</td>
+              <td>{a.topgenre}</td>
             </tbody>
-            //</div>
           ))}
       </table>
-      //</div>
     );
   }
 } // close the ComponentB component
