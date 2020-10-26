@@ -21,7 +21,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App container-fluid">
         <SearchForm
           searchTerm={this.state.searchTerm}
           onChange={this.onSearchFormChange}
@@ -105,8 +105,8 @@ class SearchResults extends Component {
           .filter(this.spotifyFilterFunction(searchTermFromProps))
           .map((a) => (
             <tbody key={a.id}>
-              <td>{a.title}</td>
               <td>{a.artist}</td>
+              <td>{a.title}</td>
               <td>{a.year}</td>
               <td>{secondsToMinutes(a.dur)}</td>
               <td>{a.topgenre}</td>
