@@ -17,6 +17,7 @@ class App extends Component {
     //re-assign the state var called searchTerm(previously empty string)
     // to js event == change in UI item
     this.setState({ searchTerm: event.target.value });
+    // console.log(this.state.searchTerm);
   }
 
   render() {
@@ -38,14 +39,18 @@ class App extends Component {
 //**************************************************//
 class SearchForm extends Component {
   render() {
-    //this.props are the properties passed to this component
-    //we have searchTerm and onChange function
+    /*this.props are the properties passed to this component
+    / we have searchTerm and onChange function. Within the input
+    / tag, notice the value of the input is assigned to the searchTerm state
+    / previously an empty string. 
+    / onChange event listener triggers the onSearchForm function 
+    */
 
     const searchTermFromProps = this.props.searchTerm;
     const onChangeFromProps = this.props.onChange;
 
     return (
-      <div class="input-group mb-3">
+      <div className="input-group mb-3">
         <input
           type="text"
           class="form-control"
@@ -58,7 +63,7 @@ class SearchForm extends Component {
       </div>
     );
   }
-} // close the ComponentA component
+} // close the SearchForm component
 
 //**************************************************//
 class SearchResults extends Component {
@@ -115,6 +120,6 @@ class SearchResults extends Component {
       </table>
     );
   }
-} // close the ComponentB component
+} // close the SearchResults component
 
 export default App;
